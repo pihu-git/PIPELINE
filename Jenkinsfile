@@ -12,6 +12,6 @@ pipeline {
 	                 }}
 		stage('Deployment'){
 		   steps {
-		sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
+		          sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
 			}}	
 }}
