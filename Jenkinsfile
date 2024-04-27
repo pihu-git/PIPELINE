@@ -1,6 +1,10 @@
 pipeline {
 	agent any 
 	
+	parameters {
+                choice choices: ['QA', 'UAT'], name: 'ENV'
+        }
+
 	stages {
 	    stage('Checkout') {
 	        steps {
@@ -8,10 +12,18 @@ pipeline {
 		      }}
 		stage('Build') {
 	           steps {
-			  sh '/home/khushi/Documents/Software-Downloads/apache-maven-3.9.6/bin/mvn install'
+			  sh '//home/khushi/Documents/Software-Downloads/apache-maven-3.9.6/bin/mvn install'
 	                 }}
 		stage('Deployment'){
-		   steps {
-		          sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
-			}}	
+		    steps {
+			script {
+			 if ( env.ENV == 'QA' ){
+        	sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
+        	echo "deployment has been COMPLETED on QA!"
+			 }
+			else ( env.ENV == 'UAT' ){
+    		sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
+    		echo "deployment has been done on UAT!"
+			}
+			}}}	
 }}
