@@ -4,7 +4,7 @@ pipeline {
 	parameters {
                 choice choices: ['QA', 'UAT'], name: 'ENV'
         }
-
+	
 	stages {
 	    stage('Checkout') {
 	        steps {
@@ -25,5 +25,9 @@ pipeline {
     		                 sh 'cp target/PIPELINE.war /home/khushi/Documents/Software-Downloads/apache-tomcat-9.0.88/webapps'
     		echo "deployment has been done on UAT!"
 			}
-			}}}	
+			}}}
+		stage('Slack') {
+	        steps {
+			slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#project', color: 'good', message: 'Welcome To Slack Notification', teamDomain: 'Devops-slack'			       
+		      }}
 }}
