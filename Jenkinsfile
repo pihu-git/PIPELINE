@@ -28,6 +28,6 @@ pipeline {
 			}}}
 		stage('Slack') {
 	        steps {
-			slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#project', color: 'good', message: 'Welcome To Slack Notification', teamDomain: 'Devops-slack'			       
+			slackSend channel: '#project', color: 'good', message: 'Welcome to Slack-Notifications', teamDomain: 'Devops-slack', tokenCredentialId: 'bb7b909b-1695-4fdc-ada4-6c07e84aace1'			       
 		      }}
 }}
